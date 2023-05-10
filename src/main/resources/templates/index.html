@@ -1,0 +1,119 @@
+<html lang="en" xmlns:th = "http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main_maket.html">
+<div layout:fragment="site">
+  <style type="text/css">
+    .main{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .block{
+      display: flex;
+      width: 90%;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 5%;
+
+    }
+    .text{
+      display: flex;
+      flex-direction: row;
+      width: 90%;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-left: 5%;
+    }
+    .card-body{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 120px;
+    }
+    .card{
+      margin-top: 20px;
+      align-items: center;
+      height: available;
+      margin-left: 15px;
+    }
+    .card-body p{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 150px;
+    }
+    .btn{
+      margin-bottom: 5px;
+    }
+    .space{
+      width: 5%;
+    }
+
+  </style>
+  <div class="main mt-5">
+    <h3>
+      WELCOME to E-SHOP
+    </h3>
+    <h6>
+      Electronic devices with high quality and service
+    </h6>
+  </div>
+  <div class="block">
+    <div class="space">
+    </div>
+    </div>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add Item
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form th:action="@{'/addItem'}" method="post">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Item</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group mt-2">
+              <label>
+                NAME:
+              </label>
+              <input type="text" class="form-control" name="name">
+            </div>
+            <div class="form-group mt-2">
+              <label>
+                PRICE:
+              </label>
+              <input type="number" class="form-control" name="price">
+            </div>
+            <div class="form-group mt-2">
+              <label>
+                DESCRIPTION:
+              </label>
+              <input type="text" class="form-control" name="description">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add Item</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    <div class="text">
+      <div class="card text-center" style="width: 300px"  th:each="it : ${items}">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${it.name}"></h5>
+          <h4 class="card-text" th:text="${it.price}">
+          </h4>
+          <p class="card-text" th:text="${it.description}"></p>
+        </div>
+        <a th:href="@{'details/' + ${it.id}}" class="btn btn-info btn-sm">DETAILS</a>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
